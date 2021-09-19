@@ -1,4 +1,4 @@
-import { getFormattedUUID } from "./helpers";
+const { getFormattedUUID } = require("./helpers");
 
 class Product {
   constructor(name, price) {
@@ -85,6 +85,4 @@ class ProductTable {
   }
 }
 
-const Amazon = new ProductTable();
-
-export default Amazon;
+module.exports = ProductTable;

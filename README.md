@@ -6,6 +6,8 @@ Change to `./productsClass` directory and run `node ./backend/Api.js`. The API i
 
 ## Using the API:
 
+Use a program like PostMan (send raw JSON body) or make front-end requests with JSON.
+
 ### GET /products
 
 Returns all the products like so:
@@ -149,32 +151,28 @@ Supports `bestSelling`, `bestRating`, `leastReturned` as values for the `sortedB
 For updating a product. Accepts an object with an `id` and key value pairs for updates, like so:
 
 ```
-
 {
-  "id": "367aa781b5c44b65b97aa65fe7664f1f",
-  "orders": 35,
-  "returns": 1,
-  "rating": 4
+    "id": "367aa781b5c44b65b97aa65fe7664f1f",
+    "orders": 35,
+    "returns": 1,
+    "rating": 4
 }
-
 ```
 
 When successful, returns:
 
 ```
-
 {
-  "message": "widget has been updated",
-  "product": {
-    "id": "367aa781b5c44b65b97aa65fe7664f1f",
-    "name": "widget",
-    "price": 5.99,
-    "orders": 35,
-    "returns": 1,
-    "rating": 4
-  }
+    "message": "widget has been updated",
+    "product": {
+        "id": "367aa781b5c44b65b97aa65fe7664f1f",
+        "name": "widget",
+        "price": 5.99,
+        "orders": 35,
+        "returns": 1,
+        "rating": 4
+    }
 }
-
 ```
 
 ### POST /products
@@ -182,10 +180,23 @@ When successful, returns:
 For creating a product. Accepts an object with a `name` and `price` key value pairs, like so:
 
 ```
-
 {
-  "name": "widget",
-  "price": 5.99
+    "name": "widget",
+    "price": 5.99
 }
+```
 
+When successful, returns:
+
+```
+{
+    "product": {
+        "name": "widget",
+        "price": 5.99,
+        "orders": 0,
+        "returns": 0,
+        "rating": 0,
+        "id": "7ce88f6bdc7f48d2b5521290161d3c6d"
+    }
+}
 ```

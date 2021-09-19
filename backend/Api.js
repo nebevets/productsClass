@@ -1,5 +1,5 @@
 const express = require("express");
-const ProductTable = require("./Products");
+const ProductTable = require("./ProductTable");
 
 const Amazon = new ProductTable();
 const api = express();

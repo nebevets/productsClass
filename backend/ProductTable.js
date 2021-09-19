@@ -1,20 +1,13 @@
-const { getFormattedUUID } = require("./helpers");
-
-class Product {
-  constructor(name, price) {
-    this.name = name;
-    this.price = price;
-    this.orders = 0;
-    this.returns = 0;
-    this.rating = 0;
-    this.id = getFormattedUUID();
-  }
-}
+const Product = require("./Product");
 
 class ProductTable {
   constructor() {
     this.products = {};
-    this.sortedBy = new Set(["bestSelling", "bestRating", "leastReturned"]);
+    this.sortedBy = Object.freeze({
+      BEST_SELLING: "bestSelling",
+      BEST_RATING: "bestRating",
+      LEAST_RETURNED: "leastReturned",
+    });
   }
 
   create(name, price) {
@@ -50,26 +43,24 @@ class ProductTable {
       ...value,
     }));
 
-    if (sortedBy && this.sortedBy.has(sortedBy)) {
-      switch (sortedBy) {
-        case "bestSelling":
-          return allProducts
-            .sort((a, b) => (a.orders < b.orders ? 1 : -1))
-            .slice(0, 10);
-        case "bestRating":
-          return allProducts
-            .sort((a, b) => (a.rating < b.rating ? 1 : -1))
-            .slice(0, 10);
-        case "leastReturned":
-          return allProducts
-            .sort((a, b) => (a.returns > b.returns ? 1 : -1))
-            .slice(0, 10);
-        default:
-          return allProducts;
-      }
-    }
+    const { BEST_SELLING, BEST_RATING, LEAST_RETURNED } = this.sortedBy;
 
-    return allProducts;
+    switch (sortedBy) {
+      case BEST_SELLING:
+        return allProducts
+          .sort((a, b) => (a.orders < b.orders ? 1 : -1))
+          .slice(0, 10);
+      case BEST_RATING:
+        return allProducts
+          .sort((a, b) => (a.rating < b.rating ? 1 : -1))
+          .slice(0, 10);
+      case LEAST_RETURNED:
+        return allProducts
+          .sort((a, b) => (a.returns > b.returns ? 1 : -1))
+          .slice(0, 10);
+      default:
+        return allProducts;
+    }
   }
 
   update({ id, ...rest }) {

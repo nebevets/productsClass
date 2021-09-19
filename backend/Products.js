@@ -31,7 +31,7 @@ class ProductTable {
       return { message: `${name} has been deleted` };
     }
 
-    throw new Error(`product with${id} not found`);
+    throw new Error(`product with id: ${id} not found`);
   }
 
   getProduct(id) {
@@ -81,7 +81,7 @@ class ProductTable {
       };
     }
 
-    throw new Error(`product with${product.id} not found`);
+    throw new Error(`product with id: ${id} not found`);
   }
 }
 
